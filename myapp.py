@@ -31,7 +31,8 @@ def update_data():
     data = {
         'id':3,
         'name':'Eden',
-        'city':'Butwal'
+        'roll':3,
+        'city':'Kathmandu'
     }
     json_data = json.dumps(data)
     r = requests.put(url=URL,data=json_data)

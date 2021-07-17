@@ -50,10 +50,11 @@ def studentView(request):
         pythondata = JSONParser().parse(stream)
         id = pythondata.get('id')
         stu = Student.objects.get(id=id)
-        serializer = StudentSerializer(stu, data=pythondata, partial=True)
+        serializer = StudentSerializer(stu, data=pythondata, partial=False)
         if serializer.is_valid():
             serializer.save()
             res = {'msg':'Data updated!'}
             json_data = JSONRenderer().render(res)
             return HttpResponse(json_data, content_type='application/json')
-        
+        json_data = JSONRenderer().render(serializer.errors)
+        return HttpResponse(json_data, content_type='application/json')
